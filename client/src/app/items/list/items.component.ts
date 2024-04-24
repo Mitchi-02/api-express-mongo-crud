@@ -1,11 +1,12 @@
 import { Component } from '@angular/core';
 import { ItemsService } from '../items.service';
 import { Item } from '../../../types';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'items-list',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './items.component.html',
   styleUrl: './items.component.css',
 })

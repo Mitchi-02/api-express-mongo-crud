@@ -1,7 +1,5 @@
-import { Component } from '@angular/core';
-import { ItemPost } from '../../../types';
-import { ItemsService } from '../items.service';
 import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -9,15 +7,16 @@ import {
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
+import { ItemsService } from '../items.service';
 
 @Component({
-  selector: 'app-create-item',
+  selector: 'app-update-item',
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
-  templateUrl: './createItem.component.html',
-  styleUrl: './createItem.component.css',
+  templateUrl: './updateItem.component.html',
+  styleUrl: './updateItem.component.css',
 })
-export class CreateItemComponent {
+export class UpdateItemComponent {
   f2 = new FormGroup({
     name: new FormControl('', [
       Validators.required,
@@ -37,11 +36,18 @@ export class CreateItemComponent {
     return this.f2.get('description');
   }
 
-  constructor(private itemService: ItemsService) {}
+  constructor(private itemService: ItemsService) {
+    this.itemService.show('id').subscribe((response) => {
+      this.f2.setValue({
+        name: response.data.name,
+        description: response.data.description,
+      });
+    });
+  }
 
   onSubmit() {
     this.itemService
-      .store({
+      .update('id', {
         name: this.f2.value.name ?? '',
         description: this.f2.value.description ?? '',
       })
