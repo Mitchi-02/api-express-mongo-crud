@@ -4,6 +4,6 @@
     <p>{{ item.description }}</p>
     <button (click)="delete(item._id)">Delete</button>
 
-    <a routerLink="'/items/'+item._id">Edit</a>
+    <a [routerLink]="'/items/update/' + item._id">Edit</a>
   </li>
 </ul>

@@ -2,11 +2,12 @@ import { Component } from '@angular/core';
 import { ItemsService } from '../items.service';
 import { Item } from '../../../types';
 import { CommonModule } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'items-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterLink],
   templateUrl: './items.component.html',
   styleUrl: './items.component.css',
 })

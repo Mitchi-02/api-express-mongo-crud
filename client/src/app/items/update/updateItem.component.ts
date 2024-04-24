@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { ItemsService } from '../items.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-update-item',
@@ -36,8 +37,14 @@ export class UpdateItemComponent {
     return this.f2.get('description');
   }
 
-  constructor(private itemService: ItemsService) {
-    this.itemService.show('id').subscribe((response) => {
+  id = '';
+
+  constructor(
+    private itemService: ItemsService,
+    private route: ActivatedRoute
+  ) {
+    this.id = route.snapshot.paramMap.get('id') ?? '';
+    this.itemService.show(this.id).subscribe((response) => {
       this.f2.setValue({
         name: response.data.name,
         description: response.data.description,
@@ -47,7 +54,7 @@ export class UpdateItemComponent {
 
   onSubmit() {
     this.itemService
-      .update('id', {
+      .update(this.id, {
         name: this.f2.value.name ?? '',
         description: this.f2.value.description ?? '',
       })

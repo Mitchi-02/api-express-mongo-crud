@@ -15,7 +15,7 @@ import {
   standalone: true,
   imports: [CommonModule, FormsModule, ReactiveFormsModule],
   templateUrl: './createItem.component.html',
-  styleUrl: './createItem.component.css',
+  styleUrl:  './createItem.component.css',
 })
 export class CreateItemComponent {
   f2 = new FormGroup({

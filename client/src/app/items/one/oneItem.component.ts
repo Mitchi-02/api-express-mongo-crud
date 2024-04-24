@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Item } from '../../../types';
 import { ItemsService } from '../items.service';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-one-tem',
@@ -12,9 +13,14 @@ import { ItemsService } from '../items.service';
 export class OneItemComponent {
   data: Item | null = null;
 
-  constructor(private itemService: ItemsService) {
-    this.itemService.show('id').subscribe((response) => {
-      this.data = response.data;
-    });
+  constructor(
+    private itemService: ItemsService,
+    private route: ActivatedRoute
+  ) {
+    this.itemService
+      .show(route.snapshot.paramMap.get('id') ?? '')
+      .subscribe((response) => {
+        this.data = response.data;
+      });
   }
 }
