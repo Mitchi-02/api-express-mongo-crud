@@ -5,6 +5,7 @@ import './config/db'
 import connectToDB from './config/db'
 import ItemRoutes from './routes/ItemRoutes'
 import { createServer } from 'http'
+import Cors from 'cors'
 
 const app = express()
 
@@ -12,6 +13,14 @@ connectToDB()
 
 app.use(urlencoded({ extended: false }))
 app.use(json())
+app.use(
+  Cors({
+    origin: '*',
+    allowedHeaders: '*',
+    methods: '*',
+    credentials: true,
+  })
+)
 
 app.use('/items', ItemRoutes)
 
