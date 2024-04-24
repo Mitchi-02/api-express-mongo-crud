@@ -1,1 +1,9 @@
-<p>items works!</p>
+<ul>
+  <li *ngFor="let item of data">
+    <h3>{{ item.name }}</h3>
+    <p>{{ item.description }}</p>
+    <button (click)="delete(item.id)">Delete</button>
+
+    <a routerLink="edit(item.id)">Edit</a>
+  </li>
+</ul>

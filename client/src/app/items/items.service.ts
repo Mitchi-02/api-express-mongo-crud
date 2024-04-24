@@ -11,22 +11,22 @@ export class ItemsService {
   constructor(private http: HttpClient) {}
 
   index(): Observable<SuccessResponse<Item[]>> {
-    return this.http.get(`${API_URL}/items`);
+    return this.http.get<SuccessResponse<Item[]>>(`${API_URL}/items`);
   }
 
-  store(data: ItemPost) {
-    return this.http.post(`${API_URL}/items`, data);
+  store(data: ItemPost): Observable<SuccessResponse<Item>> {
+    return this.http.post<SuccessResponse<Item>>(`${API_URL}/items`, data);
   }
 
-  update(id: string, data: ItemPost) {
-    return this.http.put(`${API_URL}/items/${id}`, data);
+  update(id: string, data: ItemPost): Observable<SuccessResponse<Item>> {
+    return this.http.put<SuccessResponse<Item>>(`${API_URL}/items/${id}`, data);
   }
 
-  destroy(id: string) {
-    return this.http.delete(`${API_URL}/items/${id}`);
+  destroy(id: string): Observable<SuccessResponse<Item>> {
+    return this.http.delete<SuccessResponse<Item>>(`${API_URL}/items/${id}`);
   }
 
-  show(id: string) {
-    return this.http.get(`${API_URL}/items/${id}`);
+  show(id: string): Observable<SuccessResponse<Item>> {
+    return this.http.get<SuccessResponse<Item>>(`${API_URL}/items/${id}`);
   }
 }
